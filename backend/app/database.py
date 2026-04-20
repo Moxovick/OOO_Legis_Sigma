@@ -5,7 +5,9 @@ import os
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/legis_db")
+# Normalize URL: replace postgresql+psycopg:// → postgresql:// for psycopg2 compatibility
+_raw_url = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/legis_db")
+DATABASE_URL = _raw_url.replace("postgresql+psycopg://", "postgresql://", 1)
 
 engine = create_engine(
     DATABASE_URL,
