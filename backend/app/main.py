@@ -83,3 +83,19 @@ app.include_router(admin.router)
 @app.get("/api/health")
 def health():
     return {"status": "ok"}
+
+
+@app.post("/api/internal/seed")
+def run_seed(request: Request):
+    secret = os.getenv("SEED_SECRET", "")
+    provided = request.headers.get("x-seed-secret", "")
+    if not secret or provided != secret:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=403, detail="Forbidden")
+    try:
+        import importlib
+        import app.seed as seed_module
+        importlib.reload(seed_module)
+        return {"ok": True, "message": "Seed completed"}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
