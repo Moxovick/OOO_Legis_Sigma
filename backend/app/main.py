@@ -85,6 +85,33 @@ def health():
     return {"status": "ok"}
 
 
+@app.post("/api/internal/reset-admin")
+def reset_admin(request: Request):
+    from fastapi import HTTPException
+    secret = os.getenv("SEED_SECRET", "")
+    provided = request.headers.get("x-seed-secret", "")
+    if not secret or provided != secret:
+        raise HTTPException(status_code=403, detail="Forbidden")
+    try:
+        from app.database import SessionLocal
+        from app.models import Admin
+        from app.auth import hash_password
+        db = SessionLocal()
+        email = os.getenv("ADMIN_EMAIL", "admin@legis-teh.com")
+        password = os.getenv("ADMIN_PASSWORD", "changeme123!")
+        admin = db.query(Admin).first()
+        if admin:
+            admin.email = email
+            admin.password_hash = hash_password(password)
+        else:
+            db.add(Admin(email=email, password_hash=hash_password(password)))
+        db.commit()
+        db.close()
+        return {"ok": True, "email": email}
+    except Exception as e:
+        return {"ok": False, "error": str(e)}
+
+
 @app.post("/api/internal/seed")
 def run_seed(request: Request):
     from fastapi import HTTPException
