@@ -1,0 +1,892 @@
+/* ── Font strategy ─────────────────────────────────────────────────────────────
+   NTSomic (400/500/700) has poor Windows hinting at small sizes — letters
+   look unevenly weighted at body-text sizes on Windows Chrome/Edge.
+
+   Fix: use Inter for all body/UI text (excellent ClearType hinting, full
+   Cyrillic). Keep NTSomic only for display headings (h1–h3) where the large
+   size makes hinting irrelevant.
+──────────────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis: none;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+/* Inter for all body text — overrides --fontMain (NTSomic) */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Keep NTSomic only for large display headings */
+h1, h2, h3 {
+    font-family: 'NTSomic', sans-serif;
+}
+
+button, input, textarea, select {
+    font-family: 'Inter', sans-serif;
+    font-size: inherit;
+}
+
+@media (min-width: 1201px) {
+    h1.page-title-normal {
+        font-size: 2.5rem;
+    }
+    .nav--line {
+        gap: 1vw
+    }
+    .header .nav--line .nav__link {
+        font-size: .975rem;
+    }
+    .service-features__tile {
+        min-height: 16.938rem;
+    }
+    .section--start {
+        h1 {
+            font-size: 4.8rem;
+            max-width: 78%;
+        }
+        .start-text {
+            max-width: 50%;
+        }
+    }
+    .stage-item {
+        .button-anim {
+            display: none;
+        }
+    }
+    .button-anim--stages {
+        width: 20vw;
+    }
+}
+@media (max-width: 1200px) {
+    .button-anim--stages {
+        width: 100%;
+        display: none;
+    }
+}
+.text-styles--normal-headings {
+    h2, h3, h4 {
+        text-transform: none;
+    }
+    h2 {
+        font-size: 2rem;
+        line-height: 110%;
+    }
+}
+input.button {
+    transition-property: color, opacity, border, background-color, transform;
+    transition-duration: var(--transitionDuration);
+}
+@media (min-width: 768px) {
+    .project-item__image {
+        height: 13.125rem;
+        object-fit: cover;
+    }
+}
+.swiper-button-lock {
+    display: none !important;
+}
+.pb-0 {
+    padding-bottom: 0 !important;
+}
+@media (min-width: 1201px) {
+    .tile__name--sm-font {
+        font-size: 1.5rem;
+    }
+}
+#fire-anim {
+    width: 8.125rem;
+    height: 8.125rem;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+@media (max-width: 1200px) {
+    #fire-anim {
+        width: 6.77vw;
+        height: 6.77vw;
+    }
+}
+@media (max-width: 767px) {
+    #fire-anim {
+        width: 6rem;
+        height: 6rem;
+    }
+}
+.top-nav--sub {
+    max-height: 0;
+    overflow: hidden;
+    transition: .4s max-height;
+}
+.top-nav__sub-inner {
+    padding: 1rem 0;
+    .top-nav__link {
+        font-size: .875rem;
+    }
+}
+.top-nav__item-l {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .5rem;
+}
+.top-nav__sub-trigger {
+    background-image: url(../images/icon_chevron.svg);
+    width: 1.5rem;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    background-color: #fff;
+    border:none;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform var(--transitionDuration);
+    transition-property: transform;
+    border-radius: 50%;
+    background-size: 82%;
+}
+.top-nav__sub-trigger.is-active {
+    transform: rotate(-180deg);
+}
+.top-nav__sub-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .top-nav__link {
+        opacity: .85;
+    }
+}
+.nav-spoiler__trigger {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: .5rem;
+    color: #fff;
+}
+.nav-spoiler__trigger:after {
+    content: '';
+    background-image: url(../images/icon_chevron.svg);
+    width: 1.5rem;
+    min-width: 1.5rem;
+    height: 1.5rem;
+    background-color: #fff;
+    border:none;
+    padding: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform var(--transitionDuration);
+    transition-property: transform;
+    border-radius: 50%;
+    background-size: 82%;
+}
+.nav-spoiler__trigger.is-active:after {
+    transform: rotate(-180deg);
+}
+.nav-spoiler__content {
+    max-height: 0;
+    overflow: hidden;
+    transition: .4s max-height;
+}
+.nav-spoiler__content-inner {
+    padding-top: .5rem;
+}
+.nav-spoiler {
+    .top-nav__link {
+        opacity: .75;
+        font-size: .875rem;
+    }
+}
+.modal-window__text--fz-md {
+    font-size: 1.1rem;
+}
+form .button.state-sending {
+    pointer-events: none;
+    color: transparent !important;
+    background-image: url('../images/826.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 9%;
+}
+.header-item--alt-hover:hover {
+    opacity: .65;
+}
+.tabs-nav--2 {
+    flex-wrap: wrap;
+    gap: 0.625rem;
+    border:none;
+    margin-bottom: 2.5rem;
+    .tabs-nav__btn {
+        height: 3.19rem;
+        padding: 0 1.5rem;
+        border:none;
+        background-color: var(--colorLight);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-basis: unset;
+        flex-grow: unset;
+        box-shadow: none;
+    }
+    .tabs-nav__btn.is-active {
+        background-color: var(--colorDark);
+        color: #fff;
+    }
+}
+.blog-item {
+    display: flex;
+    padding: 1.25rem;
+    color: var(--colorText);
+    gap: 1rem;
+    background-color: var(--colorLight);
+}
+.blog-item + .blog-item {
+    margin-top: 1.25rem;
+}
+.blog-item__image-holder {
+    width: 15.625rem;
+    min-width: 15.625rem;
+    img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+        object-fit: cover;
+    }
+}
+.blog-item__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.75rem;
+    width: 100%;
+}
+.blog-item__title {
+    font-size: 2.25rem;
+    line-height: 130%;
+    color: var(--colorMain);
+}
+.blog-item__text {
+    margin-top: 1rem;
+    line-height: 130%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.blog-item__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.blog-item__date {
+    color: var(--colorTextMuted);
+}
+@media (max-width: 1200px) {
+    .blog-item__title {
+        font-size: 1.5rem;
+    }
+}
+@media (max-width: 767px) {
+    .blog-item {
+        flex-direction: column;
+    }
+    .blog-item__title {
+        font-size: 1.25rem;
+    }
+    .blog-item__image-holder {
+        width: 100%;
+    }
+    .tabs-nav--2 {
+        .tabs-nav__btn {
+            height: 2.5rem;
+            padding: 0 1rem;
+        }
+    }
+}
+.text-styles {
+    ul {
+        li:before {
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 9 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9 8.5H0L4.50817 0.5L9 8.5Z' fill='%230034D8'/%3E%3C/svg%3E%0A");
+            width: 0.5625rem;
+            height: auto;
+            aspect-ratio: 1;
+            background-color: transparent;
+            border-radius: 0;
+        }
+    }
+}
+.quote {
+    padding: 5rem 1.25rem 1.25rem 1.25rem;
+    background-color: var(--colorLight);
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 130%;
+    position: relative;
+    margin: 2.5rem 0;
+}
+.quote:before {
+    content: '';
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.0952 9.70874V20H0V10.7767L4.57143 0H8.85714L6.09524 9.70874H10.0952ZM24 9.70874V20H13.9048V10.7767L18.4762 0H22.7619L20 9.70874H24Z' fill='white'/%3E%3C/svg%3E%0A");
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--colorMain);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-repeat: no-repeat;
+    background-size: 30%;
+    background-position: center;
+}
+@media (min-width: 1200px) {
+    .sticky-panel {
+        position: sticky;
+        top: calc(var(--headerHeight) + 2rem);
+    }
+}
+.article-nav__title {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 130%;
+    margin-bottom: 1rem
+}
+.article-nav__links {
+    gap: .7rem;
+    color: var(--colorMain);
+    line-height: 130%;
+    font-size: .84rem;
+    display: flex;
+    flex-direction: column
+}
+.article-nav__links-item {
+    counter-increment: titleNav;
+    display: flex;
+    align-items: flex-start;
+    gap: .25rem;
+    font-weight: 500;
+    font-size: 1rem;
+}
+.article-nav__links-item:before {
+    content: counter(titleNav) "."
+}
+.article-nav__link {
+    line-height: 130%;
+    color: var(--colorMain)
+}
+@media (min-width: 768px) {
+    .article-nav__links {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        flex-grow: 1
+    }
+}
+@media screen and (max-width: 767px) {
+    .article-nav__links {
+        font-size: .89rem
+    }
+}
+.text-page-grid {
+    padding-left: 4.17vw;
+    display: grid;
+    grid-template-columns: calc(((100vw - 53.75rem) - 8.34vw)/2) 53.75rem;
+    .text-page-grid__col:first-child {
+        padding-right: 30%;
+    }
+}
+@media (max-width: 1400px) {
+    .text-page-grid {
+        .text-page-grid__col:first-child {
+            padding-right: 2rem;
+        }
+    }
+}
+@media (max-width: 1200px) {
+    .text-page-grid {
+        grid-template-columns: 100%;
+        gap: 2rem;
+        padding: 0 var(--wrapperSpace);
+        .text-page-grid__col:first-child {
+            padding-right: 0;
+        }
+    }
+}
+.overflow-clip {
+    overflow: clip;
+}
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 500;
+    color: #b0b0b0;
+    svg {
+        width: 0.45rem;
+        min-width: 0.45rem;
+        height: auto;
+        stroke: #b0b0b0;
+    }
+}
+.back-link:hover {
+    svg {
+        stroke: var(--colorText);
+    }
+}
+.auto-carousel {
+    .blog-item {
+        width: 67.71vw;
+    }
+}
+@media screen and (max-width: 767px) {
+    .auto-carousel {
+        .blog-item {
+            width: 80vw;
+            .button {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+    }
+}
+.text-styles {
+    h2, h3 {
+        text-transform: none;
+    }
+}
+@media (max-width: 1199px) {
+    html {
+        scroll-padding-top: 64px;
+        scroll-behavior: smooth;
+    }
+    h2, h3 {
+        width: 100% !important;
+    }
+}
+
+h1 {
+    text-transform: none !important;
+}
+@media (min-width: 1201px) {
+    .header-contacts a:hover {
+        opacity: .75;
+    }
+}
+@media (min-width: 1201px) and (max-width: 1700px) {
+    .header .nav--line .nav__link {
+        font-size: .875rem;
+    }
+}
+.nav-spoiler-disabled .nav-spoiler__trigger:after {
+    display: none;
+}
+.nav-spoiler-disabled .nav-spoiler__content {
+    max-height: unset;
+}
+.button--secondary {
+    background-color: transparent;
+    border: 2px solid currentColor;
+    color: inherit;
+}
+.button--secondary:hover {
+    background-color: rgba(255,255,255,0.08);
+}
+.section--contacts {
+    padding-bottom: 0 !important;
+}
+/* Offers section: 5 cards per row on desktop */
+.offers-grid {
+    grid-template-columns: repeat(5, 1fr);
+}
+@media (max-width: 1400px) {
+    .offers-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+@media (max-width: 1200px) {
+    .offers-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+@media (max-width: 767px) {
+    .offers-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 480px) {
+    .offers-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Fix: button--primary:hover sets background:#fff (white) but text is also white (#fff !important)
+   = white text on white background = invisible. Keep blue background + white text always. */
+.button--primary:hover {
+    background-color: var(--colorMain) !important;
+    color: #fff !important;
+    border-color: var(--colorMain) !important;
+    opacity: 0.82;
+}
+/* Inside button-anim the ripple handles the effect — restore full opacity */
+.button-anim .button--primary:hover {
+    opacity: 1;
+}
+/* Fix: explode circle animation ends at white, making white button text invisible.
+   Override to use the blue-ending variant so text stays readable. */
+.button-anim .explode-circle {
+    animation-name: explodeBlue !important;
+}
+.button-anim .desplode-circle {
+    animation-name: desplodeBlue !important;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   DOSTAVKA PAGE — component styles
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Hero ── */
+.dostavka-hero {
+    position: relative;
+    min-height: 560px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.dostavka-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 30%;
+    z-index: 0;
+}
+.dostavka-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        rgba(10,15,35,0.97) 0%,
+        rgba(10,15,35,0.78) 55%,
+        rgba(10,15,35,0.30) 100%
+    );
+    z-index: 1;
+}
+.dostavka-hero__content {
+    position: relative;
+    z-index: 2;
+}
+.dostavka-hero__content .breadcrumbs {
+    margin-bottom: 1.5rem;
+}
+.dostavka-hero__title {
+    max-width: 680px;
+    margin-bottom: 1rem;
+}
+.dostavka-hero__sub {
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.82);
+    max-width: 520px;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+.dostavka-hero__cta {
+    display: inline-flex;
+}
+
+/* ── Section subtitle (below h2) ── */
+.dostavka-section-sub {
+    margin-top: 0.75rem;
+    margin-bottom: 2.5rem;
+    max-width: 580px;
+    line-height: 1.6;
+}
+
+/* ── Feature tiles ── */
+.dostavka-feature-tile {
+    min-height: 12rem;
+}
+.dostavka-feature-tile__icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1;
+}
+.dostavka-feature-tile__name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+.dostavka-feature-tile__desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.82;
+}
+
+/* ── Process steps ── */
+.dostavka-step {
+    background: var(--colorDarkSecondary, #0d1530);
+    padding: 1.75rem 1.5rem;
+    height: 100%;
+    box-sizing: border-box;
+    border-top: 3px solid var(--colorMain);
+}
+.dostavka-step__num {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--colorMain);
+    line-height: 1;
+    margin-bottom: 1rem;
+    font-family: 'NTSomic', sans-serif;
+}
+.dostavka-step__title {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #fff;
+    margin-bottom: 0.625rem;
+}
+.dostavka-step__desc {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+}
+
+/* ── Capabilities tile ── */
+.dostavka-cap-tile__text {
+    font-size: 1rem;
+}
+
+/* ── CTA block ── */
+.dostavka-cta {
+    text-align: center;
+}
+.dostavka-cta__title {
+    max-width: 580px;
+    margin: 0 auto 1rem;
+}
+.dostavka-cta__sub {
+    color: rgba(255,255,255,0.72);
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════════════
+   MOBILE ADAPTATION — ALL PAGES
+   Professional responsive for phones (≤ 767px) and tablets (768px – 1199px)
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Prevent horizontal overflow ── */
+/* ВАЖНО: overflow-x:hidden на html ломает touch-события на iOS — не ставить! */
+body {
+    max-width: 100vw;
+    overflow-x: clip; /* clip не создаёт scroll-context → touch работает */
+}
+
+/* ── iOS: убрать синюю вспышку при тапе ── */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+.swiper-wrapper {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* ── 2. Global: inputs ≥ 16px → no iOS auto-zoom ── */
+input, textarea, select {
+    font-size: max(16px, 1rem) !important;
+}
+
+/* ── 3. Touch targets: buttons ≥ 48px ── */
+.button {
+    min-height: 3rem;
+}
+
+/* ─────────────────────────────
+   TABLET  768px – 1199px
+───────────────────────────── */
+@media (max-width: 1199px) {
+    /* Sections — slightly tighter padding on tablet */
+    .dostavka-section-sub {
+        max-width: 100%;
+    }
+}
+
+/* ─────────────────────────────
+   MOBILE  ≤ 767px
+───────────────────────────── */
+@media (max-width: 767px) {
+
+    /* ── button-anim → full width (только в контенте, не в шапке) ── */
+    main .button-anim,
+    .mobile-sidebar .button-anim {
+        width: 100%;
+    }
+    main .button-anim .button,
+    .mobile-sidebar .button-anim .button {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* ── Section padding ── */
+    .section {
+        padding-top: 2.5rem !important;
+        padding-bottom: 2.5rem !important;
+    }
+    .section.section--top-0 {
+        padding-top: 0 !important;
+    }
+
+    /* ── Dostavka hero ── */
+    .dostavka-hero {
+        min-height: 100svh;
+        min-height: 480px; /* fallback for browsers without svh */
+        align-items: flex-start;
+    }
+    .dostavka-hero__overlay {
+        background: linear-gradient(
+            170deg,
+            rgba(10,15,35,0.97) 0%,
+            rgba(10,15,35,0.90) 50%,
+            rgba(10,15,35,0.70) 100%
+        );
+    }
+    .dostavka-hero__content {
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+    .dostavka-hero__title {
+        font-size: 1.85rem !important;
+        max-width: 100%;
+        line-height: 1.2;
+    }
+    .dostavka-hero__sub {
+        font-size: 1rem;
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+    .dostavka-hero__cta {
+        width: 100%;
+    }
+    .dostavka-hero__cta .button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* ── Feature tiles — 1 column on mobile (grid handled by base CSS) ── */
+    .dostavka-feature-tile {
+        min-height: auto;
+        padding: 1.25rem !important;
+    }
+
+    /* ── Process steps — tighter padding ── */
+    .dostavka-step {
+        padding: 1.25rem 1rem;
+    }
+    .dostavka-step__num {
+        font-size: 2rem;
+        margin-bottom: 0.625rem;
+    }
+
+    /* ── Section subtitles ── */
+    .dostavka-section-sub {
+        margin-bottom: 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    /* ── CTA block ── */
+    .dostavka-cta {
+        text-align: center;
+    }
+    .dostavka-cta__title {
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 1.5rem !important;
+    }
+    .dostavka-cta__sub {
+        font-size: 1rem;
+    }
+
+    /* ── Global h1 / h2 font sizes ── */
+    h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+    h2 {
+        font-size: 1.5rem;
+        line-height: 1.25;
+    }
+
+    /* ── Tiles: tighter padding on mobile ── */
+    .tile {
+        padding: 1.25rem !important;
+    }
+
+    /* ── Map iframe: shorter on mobile ── */
+    .map iframe {
+        height: 300px !important;
+    }
+
+    /* ── Header: hide contacts block entirely on mobile ── */
+    .header-contacts {
+        display: none !important;
+    }
+
+    /* ── Breadcrumbs: don't overflow ── */
+    .breadcrumbs {
+        flex-wrap: wrap;
+    }
+
+    /* ── data-form on mobile: stack cols ── */
+    .data-form__row {
+        flex-direction: column;
+    }
+    .data-form__col {
+        width: 100%;
+    }
+
+    /* ── Форма: колонки стекуются ── */
+    .data-form__row {
+        flex-direction: column !important;
+    }
+    .data-form__col {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* ── Таблицы цен: компактные отступы ── */
+    .price-table table th,
+    .price-table table td {
+        padding: 0.5rem 0.625rem !important;
+        font-size: 0.82rem;
+    }
+    .price-table {
+        -webkit-overflow-scrolling: touch;
+        overflow-x: auto;
+    }
+}
+
+/* ─────────────────────────────
+   SMALL PHONES  ≤ 480px
+───────────────────────────── */
+@media (max-width: 480px) {
+    .dostavka-hero {
+        min-height: 420px;
+    }
+    .dostavka-hero__title {
+        font-size: 1.55rem !important;
+    }
+    h1 {
+        font-size: 1.65rem;
+    }
+    h2 {
+        font-size: 1.3rem;
+    }
+    .dostavka-step {
+        padding: 1rem;
+    }
+    .dostavka-cta__title {
+        font-size: 1.3rem !important;
+    }
+}

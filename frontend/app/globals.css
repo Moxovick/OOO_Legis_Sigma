@@ -1,0 +1,47 @@
+/* NTSomic font */
+@font-face {
+  font-family: 'NTSomic';
+  src: url('/fonts/NTSomic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NTSomic';
+  src: url('/fonts/NTSomic-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NTSomic';
+  src: url('/fonts/NTSomic-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+body {
+  font-family: 'NTSomic', sans-serif;
+}
+
+/* Critical CSS variables — defined here in case styles.min.css loads after first paint */
+:root {
+  --colorMain: #0034D8;
+  --colorDark: #232323;
+  --colorDarkSecondary: #202020;
+  --colorText: #1F1F1F;
+  --headerHeight: 9.25rem;
+}
+@media screen and (max-width: 1200px) {
+  :root { --headerHeight: 4rem; }
+}
+
+/* Header critical styles — ensure visible dark header from first render */
+.header {
+  background-color: #202020 !important;
+  color: #fff !important;
+}
+.header a {
+  color: #fff !important;
+}

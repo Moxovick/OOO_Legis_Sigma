@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+.env
+*.egg-info/
+
+# Alembic local cache
+backend/alembic/__pycache__/
+
+# Uploads (user-generated content, not code)
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Node / Next.js
+node_modules/
+.next/
+frontend/.env.local
+frontend/.env*.local
+frontend/tsconfig.tsbuildinfo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+backend/.claude/

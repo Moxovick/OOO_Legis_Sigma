@@ -1,0 +1,35 @@
+# Секреты — никогда не в git
+.env
+*.env
+.env.*
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+venv/
+env/
+.venv/
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Загрузки (пользовательские файлы)
+uploads/
+
+# БД
+*.db
+*.sqlite
+*.sqlite3
+
+# Логи
+*.log
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
