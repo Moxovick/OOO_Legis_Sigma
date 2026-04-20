@@ -10,10 +10,13 @@ load_dotenv()
 
 from app.database import engine, SessionLocal
 from app.models import Base
-Base.metadata.create_all(bind=engine, checkfirst=True)
 
-# Auto-seed on first startup (creates admin + fills DB if empty)
-def _auto_seed():
+def _init_db():
+    """Create tables and seed data — wrapped so startup never crashes."""
+    try:
+        Base.metadata.create_all(bind=engine, checkfirst=True)
+    except Exception:
+        return  # DB not reachable — don't crash, requests will fail naturally
     try:
         from app.models import Admin
         from app.auth import hash_password
@@ -24,12 +27,11 @@ def _auto_seed():
             db.add(Admin(email=email, password_hash=hash_password(password)))
             db.commit()
         db.close()
-        # Seed the rest of the data
         from app import seed as _seed_module  # noqa: F401
     except Exception:
-        pass  # Don't crash startup if seed fails
+        pass
 
-_auto_seed()
+_init_db()
 
 from app.routers import public, leads, admin
 
