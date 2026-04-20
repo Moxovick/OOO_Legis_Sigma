@@ -34,6 +34,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { protocol: "http", hostname: "localhost" },
       { protocol: "https", hostname: "legis-teh.ru" },
+      { protocol: "https", hostname: "*.up.railway.app" },
     ],
   },
 };
