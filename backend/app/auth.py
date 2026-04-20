@@ -15,7 +15,7 @@ if not SECRET_KEY or len(SECRET_KEY) < 32:
     raise RuntimeError("SECRET_KEY не задан или слишком короткий (минимум 32 символа). Установите переменную окружения SECRET_KEY.")
 ALGORITHM = "HS256"  # жёстко, алгоритм не настраивается извне
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 15))
-REFRESH_TOKEN_EXPIRE_DAYS = int(os.getenv("REFRESH_TOKEN_EXPIRE_DAYS", 30))
+REFRESH_TOKEN_EXPIRE_MINUTES = int(os.getenv("REFRESH_TOKEN_EXPIRE_MINUTES", 60))
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto", bcrypt__rounds=12)
 bearer_scheme = HTTPBearer()
@@ -37,7 +37,7 @@ def create_access_token(admin_id: int) -> str:
 
 def create_refresh_token(admin_id: int, db: Session) -> str:
     token_str = secrets.token_urlsafe(64)
-    expires_at = datetime.now(timezone.utc) + timedelta(days=REFRESH_TOKEN_EXPIRE_DAYS)
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=REFRESH_TOKEN_EXPIRE_MINUTES)
     db_token = RefreshToken(token=token_str, admin_id=admin_id, expires_at=expires_at)
     db.add(db_token)
     db.commit()
