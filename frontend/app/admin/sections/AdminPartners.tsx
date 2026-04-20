@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { adminFetch } from "@/lib/api";
 import type { Partner } from "@/types";
 
@@ -7,33 +7,9 @@ export default function AdminPartners({ token }: { token: string }) {
   const [partners, setPartners] = useState<Partner[]>([]);
   const [editing, setEditing] = useState<Partial<Partner> | null>(null);
   const [saving, setSaving] = useState(false);
-  const [uploading, setUploading] = useState(false);
-  const fileRef = useRef<HTMLInputElement>(null);
 
   const load = () => adminFetch<Partner[]>("/api/admin/partners", token).then(setPartners);
   useEffect(() => { load(); }, [token]);
-
-  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file || !editing) return;
-    setUploading(true);
-    try {
-      const formData = new FormData();
-      formData.append("file", file);
-      const res = await fetch("/api/admin/upload", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body: formData,
-      });
-      if (!res.ok) throw new Error("Ошибка загрузки");
-      const data = await res.json();
-      setEditing((p) => ({ ...p!, logo_url: data.url }));
-    } catch (err) {
-      alert(String(err));
-    } finally {
-      setUploading(false);
-    }
-  };
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,15 +43,14 @@ export default function AdminPartners({ token }: { token: string }) {
             <input required value={editing.name ?? ""} onChange={(e) => setEditing((p) => ({ ...p!, name: e.target.value }))} style={inputStyle} />
           </div>
           <div style={{ marginBottom: "1.25rem" }}>
-            <label style={labelStyle}>Логотип</label>
+            <label style={labelStyle}>Логотип (URL)</label>
             {editing.logo_url && <img src={editing.logo_url} alt="" style={{ maxHeight: "60px", marginBottom: "0.5rem", display: "block" }} />}
-            <div style={{ display: "flex", gap: "0.75rem", alignItems: "center", flexWrap: "wrap" }}>
-              <input value={editing.logo_url ?? ""} onChange={(e) => setEditing((p) => ({ ...p!, logo_url: e.target.value }))} style={{ ...inputStyle, flex: 1 }} placeholder="/uploads/..." />
-              <button type="button" onClick={() => fileRef.current?.click()} style={editBtn} disabled={uploading}>
-                {uploading ? "Загрузка..." : "Загрузить файл"}
-              </button>
-              <input ref={fileRef} type="file" accept="image/*" style={{ display: "none" }} onChange={handleUpload} />
-            </div>
+            <input
+              value={editing.logo_url ?? ""}
+              onChange={(e) => setEditing((p) => ({ ...p!, logo_url: e.target.value }))}
+              style={inputStyle}
+              placeholder="https://example.com/logo.png"
+            />
           </div>
           <div style={{ marginBottom: "1.25rem" }}>
             <label style={labelStyle}>Порядок</label>

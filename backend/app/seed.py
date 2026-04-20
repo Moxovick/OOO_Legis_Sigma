@@ -1,6 +1,6 @@
 """
-Run: python -m app.seed
-Creates initial admin and fills database with content from legis-teh.com
+Auto-seed: called on first startup from main.py
+Can also be run manually: python -m app.seed
 """
 import sys
 import os
@@ -9,24 +9,12 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from dotenv import load_dotenv
 load_dotenv()
 
-from app.database import engine, SessionLocal, Base
+from app.database import SessionLocal
 from app.models import Admin, Setting, Service, Offer, Partner, Stat
-from app.auth import hash_password
-
-Base.metadata.create_all(bind=engine)
 
 db = SessionLocal()
 
-# ── Admin ──────────────────────────────────────────────────────────────────────
-ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "admin@legis-teh.com")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "changeme123!")
-
-if not db.query(Admin).filter(Admin.email == ADMIN_EMAIL).first():
-    db.add(Admin(email=ADMIN_EMAIL, password_hash=hash_password(ADMIN_PASSWORD)))
-    db.commit()
-    print(f"Admin created: {ADMIN_EMAIL}")
-else:
-    print("Admin already exists")
+# Admin is seeded separately in main.py before this module is imported
 
 # ── Settings ───────────────────────────────────────────────────────────────────
 settings_data = {
@@ -174,4 +162,3 @@ if not db.query(Partner).first():
     print("Partners seeded")
 
 db.close()
-print("\nDone! Seed completed successfully.")

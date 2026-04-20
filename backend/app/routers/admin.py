@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, status, UploadFile, File, Query, Request
+from fastapi import APIRouter, Depends, HTTPException, status, Query, Request
 from sqlalchemy.orm import Session
 from slowapi import Limiter
 from slowapi.util import get_remote_address
@@ -16,16 +16,9 @@ from app.schemas import (
 )
 from app.auth import verify_password, create_access_token, create_refresh_token, rotate_refresh_token, get_current_admin
 import os
-import re
-import uuid
-from pathlib import Path
 
 router = APIRouter(prefix="/api/admin", tags=["admin"])
 limiter = Limiter(key_func=get_remote_address)
-
-UPLOAD_DIR = Path(os.getenv("UPLOAD_DIR", "./uploads"))
-MAX_SIZE_MB = int(os.getenv("MAX_UPLOAD_SIZE_MB", 5))
-ALLOWED_TYPES = {"image/jpeg", "image/png", "image/webp", "image/svg+xml"}
 
 
 # ── Auth ──────────────────────────────────────────────────────────────────────
@@ -256,80 +249,6 @@ def admin_delete_lead(lead_id: int, db: Session = Depends(get_db), _=Depends(get
         raise HTTPException(status_code=404, detail="Не найдено")
     db.delete(lead)
     db.commit()
-
-
-# ── Upload ────────────────────────────────────────────────────────────────────
-
-MAGIC_BYTES = {
-    b"\xff\xd8\xff": ".jpg",
-    b"\x89PNG\r\n": ".png",
-    b"RIFF": ".webp",  # webp starts with RIFF....WEBP
-}
-
-def _validate_magic(content: bytes, ext: str) -> bool:
-    """Check file magic bytes match the declared extension."""
-    if ext == ".svg":
-        # SVG is XML — just check it starts with text characters
-        try:
-            text = content[:512].decode("utf-8", errors="ignore").lstrip()
-            return text.startswith("<") or text.startswith("<?")
-        except Exception:
-            return False
-    if ext in (".jpg", ".jpeg"):
-        return content[:3] == b"\xff\xd8\xff"
-    if ext == ".png":
-        return content[:4] == b"\x89PNG"
-    if ext == ".webp":
-        return content[:4] == b"RIFF" and content[8:12] == b"WEBP"
-    return False
-
-def _sanitize_svg(content: bytes) -> bytes:
-    """Strip dangerous elements from SVG: script, foreignObject, event handlers."""
-    try:
-        text = content.decode("utf-8")
-    except Exception:
-        raise HTTPException(status_code=400, detail="Не удалось прочитать SVG файл")
-    # Remove <script> blocks
-    text = re.sub(r"<script[\s\S]*?</script>", "", text, flags=re.IGNORECASE)
-    # Remove event handler attributes (onclick, onload, etc.)
-    text = re.sub(r'\s+on\w+\s*=\s*["\'][^"\']*["\']', "", text, flags=re.IGNORECASE)
-    # Remove javascript: hrefs
-    text = re.sub(r'href\s*=\s*["\']javascript:[^"\']*["\']', 'href="#"', text, flags=re.IGNORECASE)
-    # Remove <foreignObject> (can embed HTML)
-    text = re.sub(r"<foreignObject[\s\S]*?</foreignObject>", "", text, flags=re.IGNORECASE)
-    return text.encode("utf-8")
-
-
-@router.post("/upload")
-async def admin_upload(
-    file: UploadFile = File(...),
-    _=Depends(get_current_admin),
-):
-    if file.content_type not in ALLOWED_TYPES:
-        raise HTTPException(status_code=400, detail="Разрешены только изображения (jpg, png, webp, svg)")
-
-    content = await file.read()
-    if len(content) > MAX_SIZE_MB * 1024 * 1024:
-        raise HTTPException(status_code=400, detail=f"Файл слишком большой (макс. {MAX_SIZE_MB} MB)")
-
-    ext = Path(file.filename or "image.jpg").suffix.lower()
-    if ext not in {".jpg", ".jpeg", ".png", ".webp", ".svg"}:
-        ext = ".jpg"
-
-    # Verify magic bytes match actual file type
-    if not _validate_magic(content, ext):
-        raise HTTPException(status_code=400, detail="Содержимое файла не соответствует расширению")
-
-    # Sanitize SVG to remove scripts and event handlers
-    if ext == ".svg":
-        content = _sanitize_svg(content)
-
-    filename = f"{uuid.uuid4().hex}{ext}"
-    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
-    dest = UPLOAD_DIR / filename
-
-    dest.write_bytes(content)
-    return {"url": f"/uploads/{filename}"}
 
 
 # ── Page Content ──────────────────────────────────────────────────────────────

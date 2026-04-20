@@ -1,20 +1,35 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import JSONResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from slowapi.errors import RateLimitExceeded
 from dotenv import load_dotenv
 import os
-from pathlib import Path
 
 load_dotenv()
 
-from app.database import engine
+from app.database import engine, SessionLocal
 from app.models import Base
-# Create any new tables without touching existing ones
 Base.metadata.create_all(bind=engine, checkfirst=True)
+
+# Auto-seed on first startup (creates admin + fills DB if empty)
+def _auto_seed():
+    try:
+        from app.models import Admin
+        from app.auth import hash_password
+        db = SessionLocal()
+        if not db.query(Admin).first():
+            email = os.getenv("ADMIN_EMAIL", "admin@legis-teh.com")
+            password = os.getenv("ADMIN_PASSWORD", "changeme123!")
+            db.add(Admin(email=email, password_hash=hash_password(password)))
+            db.commit()
+        db.close()
+        # Seed the rest of the data
+        from app import seed as _seed_module  # noqa: F401
+    except Exception:
+        pass  # Don't crash startup if seed fails
+
+_auto_seed()
 
 from app.routers import public, leads, admin
 
@@ -53,15 +68,9 @@ async def security_headers(request: Request, call_next):
     response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
     response.headers["Permissions-Policy"] = "geolocation=(), microphone=(), camera=()"
     response.headers["X-Permitted-Cross-Domain-Policies"] = "none"
-    # Скрыть имя сервера
     if "server" in response.headers:
         del response.headers["server"]
     return response
-
-# Static files for uploads
-upload_dir = Path(os.getenv("UPLOAD_DIR", "./uploads"))
-upload_dir.mkdir(parents=True, exist_ok=True)
-app.mount("/uploads", StaticFiles(directory=str(upload_dir)), name="uploads")
 
 # Routers
 app.include_router(public.router)
