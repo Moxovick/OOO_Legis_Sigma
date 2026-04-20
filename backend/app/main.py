@@ -86,19 +86,24 @@ def health():
 
 
 @app.post("/api/internal/reset-admin")
-def reset_admin(request: Request):
+async def reset_admin(request: Request):
     from fastapi import HTTPException
     secret = os.getenv("SEED_SECRET", "")
     provided = request.headers.get("x-seed-secret", "")
     if not secret or provided != secret:
         raise HTTPException(status_code=403, detail="Forbidden")
     try:
+        body = await request.json()
+        email = str(body.get("email", "")).strip()
+        password = str(body.get("password", "")).strip()
+        if not email or not password:
+            return {"ok": False, "error": "email and password required"}
+        if len(password.encode()) > 72:
+            return {"ok": False, "error": "password too long (max 72 bytes)"}
         from app.database import SessionLocal
         from app.models import Admin
         from app.auth import hash_password
         db = SessionLocal()
-        email = os.getenv("ADMIN_EMAIL", "admin@legis-teh.com")
-        password = os.getenv("ADMIN_PASSWORD", "changeme123!")
         admin = db.query(Admin).first()
         if admin:
             admin.email = email
