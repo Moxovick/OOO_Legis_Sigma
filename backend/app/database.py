@@ -5,16 +5,21 @@ import os
 
 load_dotenv()
 
-# Normalize URL: replace postgresql+psycopg:// → postgresql:// for psycopg2 compatibility
+# Normalize URL: strip sslmode from query string and +psycopg prefix
 _raw_url = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/legis_db")
-DATABASE_URL = _raw_url.replace("postgresql+psycopg://", "postgresql://", 1)
+_url = _raw_url.replace("postgresql+psycopg://", "postgresql://", 1)
+# Remove ?sslmode=... from URL — passed via connect_args instead
+if "?sslmode=" in _url:
+    _url = _url.split("?sslmode=")[0]
+DATABASE_URL = _url
 
 engine = create_engine(
     DATABASE_URL,
-    pool_pre_ping=True,   # reconnect if connection dropped (important for serverless)
-    pool_size=1,          # 1 connection per serverless instance
-    max_overflow=0,       # no extra connections
-    pool_recycle=300,     # recycle connections every 5 min
+    connect_args={"sslmode": "require"},
+    pool_pre_ping=True,
+    pool_size=1,
+    max_overflow=0,
+    pool_recycle=300,
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
