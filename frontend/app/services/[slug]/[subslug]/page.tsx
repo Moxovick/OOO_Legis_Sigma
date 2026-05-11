@@ -2,7 +2,7 @@ import { getSettings, getService, settingsToMap } from "@/lib/api";
 import { notFound } from "next/navigation";
 import SubServicePageClient from "./PageClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 const SUB_TITLES: Record<string, string> = {
   "proektirovanie-skud": "Проектирование СКУД",

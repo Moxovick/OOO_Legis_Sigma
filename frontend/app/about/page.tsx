@@ -1,7 +1,7 @@
 import { getSettings, getStats, getPartners, getServices, settingsToMap } from "@/lib/api";
 import PageClient from "./PageClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return {

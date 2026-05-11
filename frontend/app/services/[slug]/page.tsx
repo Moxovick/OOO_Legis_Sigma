@@ -2,7 +2,7 @@ import { getSettings, getService, getServices, settingsToMap } from "@/lib/api";
 import { notFound } from "next/navigation";
 import ServicePageClient from "./PageClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export async function generateStaticParams() {
   try {

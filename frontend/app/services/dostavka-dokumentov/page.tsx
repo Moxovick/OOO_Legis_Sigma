@@ -1,7 +1,7 @@
 import { getSettings, settingsToMap } from "@/lib/api";
 import PageClient from "./PageClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export const metadata = {
   title: "Доставка документов и частные инкассации — Легис-Тех",

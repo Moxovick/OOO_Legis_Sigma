@@ -1,7 +1,7 @@
 import { getSettings, getServices, getOffers, getPartners, getStats, settingsToMap } from "@/lib/api";
 import HomeClient from "./HomeClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 86400;
 
 export default async function HomePage() {
   const [rawSettings, services, offers, partners, stats] = await Promise.allSettled([
