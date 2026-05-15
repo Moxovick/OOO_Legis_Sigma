@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git *)",
+      "Bash(gh auth *)",
+      "Bash(cmdkey /list)",
+      "Bash(grep -r \"color\\\\|#[0-9a-fA-F]\\\\{6\\\\}\\\\|rgb\" ./wp-content/themes/sp/css/color*)",
+      "Bash(find ./wp-content/themes/sp* -maxdepth 2 -type f \\\\\\( -name \"*.php\" -o -name \"index.html\" \\\\\\))",
+      "Bash(grep -r \"ee000e\\\\|fb4848\\\\|d4990a\" ./wp-content/themes/sp* --include=\"*.css\")"
+    ]
+  }
+}

@@ -32,14 +32,14 @@ export async function generateMetadata({
   const title = SUB_TITLES[subslug];
   if (title) {
     return {
-      title: `${title} — Легис-Тех`,
-      description: `${title} — профессиональные услуги от компании Легис-Тех`,
+      title: `${title} — Сигма-Профи`,
+      description: `${title} — профессиональные услуги от компании Сигма-Профи`,
     };
   }
   try {
     const service = await getService(slug);
     return {
-      title: `${service.title} — Легис-Тех`,
+      title: `${service.title} — Сигма-Профи`,
       description: service.description || "",
     };
   } catch {

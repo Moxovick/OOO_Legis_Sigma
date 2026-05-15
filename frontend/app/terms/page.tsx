@@ -5,7 +5,7 @@ import PageClient from "./PageClient";
 
 export async function generateMetadata() {
   return {
-    title: 'Политика конфиденциальности — ООО "Легис-Тех"',
+    title: 'Политика конфиденциальности — ООО "Сигма-Профи"',
   };
 }
 

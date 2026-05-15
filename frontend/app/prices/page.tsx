@@ -5,7 +5,7 @@ export const revalidate = 86400;
 
 export async function generateMetadata() {
   return {
-    title: 'Цены на услуги — ООО "Легис-Тех"',
+    title: 'Цены на услуги — ООО ЧОП "Сигма-Профи"',
     description: "Стоимость услуг по монтажу и обслуживанию систем безопасности. Индивидуальный расчёт.",
   };
 }

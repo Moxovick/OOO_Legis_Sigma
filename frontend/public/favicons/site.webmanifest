@@ -1,15 +1,15 @@
 {
-  "name": "legis-teh",
-  "short_name": "legis-teh",
+  "name": "sigma-profi",
+  "short_name": "sigma-profi",
   "icons": [
     {
-      "src": "/local/templates/legis/assets/favicons/web-app-manifest-192x192.png",
+      "src": "/favicons/favicon-96x96.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/local/templates/legis/assets/favicons/web-app-manifest-512x512.png",
+      "src": "/favicons/favicon-96x96.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

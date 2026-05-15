@@ -10,11 +10,11 @@ import dynamic from "next/dynamic";
 const Modal = dynamic(() => import("@/components/ui/Modal"), { ssr: false });
 
 const COMPANY_INFO = [
-  { label: "ИНН",               value: "7701814145" },
-  { label: "КПП",               value: "770101001" },
-  { label: "ОГРН",              value: "5087746616535" },
-  { label: "Дата образования",  value: "19.12.2008" },
-  { label: "Юридический адрес", value: "101000, Москва, вн.тер., Муниципальный округ Басманный, пер.Большой Златоустинский, д. 7, стр. 1, эт.3 ПОМ 1 КОМ 11" },
+  { label: "ИНН",               value: "7707293185" },
+  { label: "КПП",               value: "771601001" },
+  { label: "ОГРН",              value: "1037739060666" },
+  { label: "Дата образования",  value: "1993" },
+  { label: "Юридический адрес", value: "127322, г. Москва, Огородный проезд, д. 20, стр. 27, 5 этаж" },
 ];
 
 /* ── Contact Form ───────────────────────────────────────────────────────── */
@@ -146,7 +146,7 @@ export default function PageClient({ settings }: { settings: SettingsMap }) {
               </li>
             </ul>
 
-            <h1>Контакты компании «Легис-Тех»</h1>
+            <h1>Контакты компании «Сигма-Профи»</h1>
 
             <div className="grid-cols grid-cols--4">
               {/* Phone */}
@@ -184,7 +184,7 @@ export default function PageClient({ settings }: { settings: SettingsMap }) {
                     </div>
                   </div>
                   <div className="tile__bottom">
-                    <div>{settings.email || "info@legis-teh.ru"}</div>
+                    <div>{settings.email || "info@sigma-profi.org"}</div>
                   </div>
                 </a>
               </div>
@@ -255,7 +255,7 @@ export default function PageClient({ settings }: { settings: SettingsMap }) {
               <div className="grid-cols__col">
                 <div className="mw-1 text-styles">
                   <h2>Реквизиты</h2>
-                  <p className="big-text">ООО «Легис-Тех»</p>
+                  <p className="big-text">ООО ЧОП «СИГМА-ПРОФИ»</p>
                   <ul className="list">
                     {COMPANY_INFO.map((item) => (
                       <li key={item.label}>

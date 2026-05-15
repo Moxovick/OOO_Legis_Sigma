@@ -5,8 +5,8 @@ export const revalidate = 86400;
 
 export async function generateMetadata() {
   return {
-    title: 'Контакты — ООО "Легис-Тех"',
-    description: "Контакты компании Легис-Тех: телефон, email, адрес офиса, время работы.",
+    title: 'Контакты — ООО ЧОП "Сигма-Профи"',
+    description: "Контакты компании Сигма-Профи: телефон, email, адрес офиса, время работы.",
   };
 }
 

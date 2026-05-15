@@ -1,4 +1,4 @@
-# Legis-Teh — Инструкция по запуску
+# Sigma-Profi — Инструкция по запуску
 
 ## Локальная разработка
 
@@ -39,7 +39,7 @@ npm run dev
 
 Сайт: http://localhost:3000  
 Админка: http://localhost:3000/admin  
-Логин по умолчанию: `admin@legis-teh.com` / `changeme123!`
+Логин по умолчанию: `admin@sigma-profi.org` / `changeme123!`
 
 **Сразу смени пароль через базу данных или добавь эндпоинт смены пароля.**
 
@@ -59,16 +59,16 @@ npm run dev
 ### 1. База данных
 
 ```sql
-CREATE USER legis_user WITH PASSWORD 'StrongPassword';
-CREATE DATABASE legis_db OWNER legis_user;
+CREATE USER sigma_user WITH PASSWORD 'StrongPassword';
+CREATE DATABASE sigma_db OWNER sigma_user;
 ```
 
 ### 2. Backend
 
 ```bash
-# Скопировать проект в /var/www/legis-new/
+# Скопировать проект в /var/www/sigma-new/
 cp .env.example .env
-# Настроить DATABASE_URL, SECRET_KEY, CORS_ORIGINS=https://legis-teh.com
+# Настроить DATABASE_URL, SECRET_KEY, CORS_ORIGINS=https://sigma-profi.org
 # ADMIN_PASSWORD=ВашПарольАдмина
 
 bash deploy/start-backend.sh
@@ -90,15 +90,15 @@ pm2 startup
 ### 4. Nginx
 
 ```bash
-cp deploy/nginx.conf /etc/nginx/sites-available/legis-teh.com
-ln -s /etc/nginx/sites-available/legis-teh.com /etc/nginx/sites-enabled/
+cp deploy/nginx.conf /etc/nginx/sites-available/sigma-profi.org
+ln -s /etc/nginx/sites-available/sigma-profi.org /etc/nginx/sites-enabled/
 nginx -t && systemctl reload nginx
 ```
 
 ### 5. HTTPS (Let's Encrypt)
 
 ```bash
-certbot --nginx -d legis-teh.com -d www.legis-teh.com
+certbot --nginx -d sigma-profi.org -d www.sigma-profi.org
 ```
 
 ---
@@ -106,7 +106,7 @@ certbot --nginx -d legis-teh.com -d www.legis-teh.com
 ## Структура проекта
 
 ```
-legis-new/
+sigma-new/
 ├── backend/
 │   ├── app/
 │   │   ├── main.py          — FastAPI app

@@ -14,7 +14,7 @@ const Modal = dynamic(() => import("@/components/ui/Modal"), { ssr: false });
 const WHY_ITEMS = [
   {
     title: "Опыт",
-    desc: "Завоёвываем признание клиентов с 2008 года. Накопленные за годы работы решения позволяют организовать защиту самого высокого уровня на объектах любой сложности.",
+    desc: "Завоёвываем признание клиентов с 1993 года. Накопленные за годы работы решения позволяют организовать защиту самого высокого уровня на объектах любой сложности.",
     icon: "/upload/iblock/414/o0n2vap51h0qchnzu5r13c75lw57vzzi.svg",
     image: "/upload/iblock/6f1/abmpx37jf947bwzc9la2gh5w01j3gyx2.webp",
   },
@@ -130,11 +130,11 @@ export default function PageClient({ settings, stats, partners, services }: Prop
               <li className="breadcrumbs__item current"><span>О компании</span></li>
             </ul>
             <h1>О компании</h1>
-            <div className="legis-text">
-              <div className="legis-text__start">
-                <span className="text-primary">«ЛЕГИС» —</span> всегда
+            <div className="sigma-text">
+              <div className="sigma-text__start">
+                <span className="text-primary">«СИГМА-ПРОФИ» —</span> всегда
               </div>
-              <div className="legis-text__end">
+              <div className="sigma-text__end">
                 на шаг впереди.
               </div>
             </div>
@@ -142,9 +142,9 @@ export default function PageClient({ settings, stats, partners, services }: Prop
               <div className="text-styles">
                 <h2>Компания<br />с большой историей</h2>
                 <p>
-                  Компания была основана в 2008 году как одно из подразделений частного охранного агентства «ЛЕГИС»,
+                  Компания была основана в 1993 году как частное охранное предприятие «СИГМА-ПРОФИ»,
                   предоставляющее комплекс услуг по технической безопасности. На сегодняшний день — это самостоятельное
-                  динамично развивающееся предприятие, которое входит в состав Группы Компаний «ЛЕГИС» — лидера отрасли
+                  динамично развивающееся предприятие, входящее в состав Группы Компаний «СИГМА-ПРОФИ» — лидера отрасли
                   услуг безопасности с более чем 30-летней деловой репутацией.
                 </p>
                 <p>
@@ -152,7 +152,7 @@ export default function PageClient({ settings, stats, partners, services }: Prop
                   Наши инженеры годами совершенствуют свои навыки работы с техническими средствами охраны.
                   Разработанные проекты постоянно обновляются, отвечая новым вызовам и угрозам безопасности.
                 </p>
-                <h3>«ЛЕГИС» — всегда на шаг впереди.</h3>
+                <h3>«СИГМА-ПРОФИ» — всегда на шаг впереди.</h3>
               </div>
             </div>
 

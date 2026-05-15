@@ -257,7 +257,7 @@ export default function PageClient({ settings }: Props) {
               <li className="breadcrumbs__item"><a className="breadcrumbs__item-link" href="/">Главная</a></li>
               <li className="breadcrumbs__item current"><span>Цены</span></li>
             </ul>
-            <h1>Стоимость технических средств охраны: цены на услуги «Легис-Тех»</h1>
+            <h1>Стоимость технических средств охраны: цены на услуги «Сигма-Профи»</h1>
             <div className="spacing-y-sm text-styles">
               <p>
                 Цены, представленные на сайте, являются ориентировочными и могут быть изменены

@@ -10,7 +10,7 @@ const GROUPS = [
     hint: "Отображаются в шапке, подвале и разделе контактов",
     fields: [
       { key: "phone", label: "Телефон", placeholder: "8 495 128-13-18", type: "text" },
-      { key: "email", label: "Email",   placeholder: "info@legis-teh.com", type: "email" },
+      { key: "email", label: "Email",   placeholder: "info@sigma-profi.org", type: "email" },
     ],
   },
   {

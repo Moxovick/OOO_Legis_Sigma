@@ -30,7 +30,7 @@ export default function Header({ settings, onModal }: Props) {
             <div className="header__top-left">
               <Link className="logo" href="/">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img className="logo__image" src="/images/logo.svg" width={152} height={39} alt='ООО "Легис-Тех"' />
+                <img className="logo__image" src="/images/logo.svg" width={152} height={39} alt='ООО ЧОП "Сигма-Профи"' />
               </Link>
               <nav className="top-nav tab-hide">
                 <Link className="top-nav__link" href="/about"><span>О компании</span></Link>

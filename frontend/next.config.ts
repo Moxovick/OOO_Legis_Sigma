@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       { protocol: "http", hostname: "localhost" },
-      { protocol: "https", hostname: "legis-teh.ru" },
+      { protocol: "https", hostname: "sigma-profi.org" },
       { protocol: "https", hostname: "*.up.railway.app" },
     ],
   },

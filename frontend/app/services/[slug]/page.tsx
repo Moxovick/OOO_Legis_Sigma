@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   try {
     const service = await getService(slug);
     return {
-      title: service.meta_title || `${service.title} — Легис-Тех`,
+      title: service.meta_title || `${service.title} — Сигма-Профи`,
       description: service.meta_description || service.description || "",
     };
   } catch {

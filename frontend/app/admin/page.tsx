@@ -54,7 +54,7 @@ export default function AdminPage() {
       }}>
         {/* Logo */}
         <div style={{ padding: "1.75rem 1.5rem 1.25rem" }}>
-          <img src="/images/logo.svg" alt="Легис-Тех" style={{ height: "28px", filter: "brightness(0) invert(1)", display: "block" }} />
+          <img src="/images/logo.svg" alt="Сигма-Профи" style={{ height: "28px", filter: "brightness(0) invert(1)", display: "block" }} />
           <div style={{ marginTop: "0.5rem", fontSize: "0.7rem", color: "#475569", textTransform: "uppercase", letterSpacing: "0.08em", fontWeight: 600 }}>
             Панель управления
           </div>
@@ -79,7 +79,7 @@ export default function AdminPage() {
 
         {/* Footer */}
         <div style={{ padding: "1rem 1.5rem 1.5rem", borderTop: "1px solid #1e293b" }}>
-          <div style={{ fontSize: "0.75rem", color: "#475569", marginBottom: "0.75rem" }}>Легис-Тех © 2024</div>
+          <div style={{ fontSize: "0.75rem", color: "#475569", marginBottom: "0.75rem" }}>Сигма-Профи © 2024</div>
           <button onClick={handleLogout} style={{
             width: "100%", background: "transparent", color: "#64748b",
             border: "1px solid #1e293b", borderRadius: "8px",

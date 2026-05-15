@@ -22,7 +22,7 @@ def _init_db():
         from app.auth import hash_password
         db = SessionLocal()
         if not db.query(Admin).first():
-            email = os.getenv("ADMIN_EMAIL", "admin@legis-teh.com")
+            email = os.getenv("ADMIN_EMAIL", "admin@sigma-profi.org")
             password = os.getenv("ADMIN_PASSWORD", "changeme123!")
             db.add(Admin(email=email, password_hash=hash_password(password)))
             db.commit()
@@ -40,7 +40,7 @@ limiter = Limiter(key_func=get_remote_address)
 _debug = os.getenv("DEBUG", "false").lower() == "true"
 
 app = FastAPI(
-    title="Легис-Тех API",
+    title="Сигма-Профи API",
     version="1.0.0",
     docs_url="/api/docs" if _debug else None,
     redoc_url=None,
@@ -131,25 +131,25 @@ def run_seed(request: Request):
         inserted = []
 
         settings_data = {
-            "phone": "8 495 128-13-18",
-            "phone_href": "tel:84951281318",
-            "email": "info@legis-teh.com",
-            "address": "101000, Москва, Большой Златоустинский переулок, дом 7, строение 1",
+            "phone": "8 (495) 937-60-00",
+            "phone_href": "tel:84959376000",
+            "email": "info@sigma-profi.org",
+            "address": "127322, г. Москва, Огородный проезд, д. 20, стр. 27, 5 этаж",
             "work_hours_weekdays": "Пн-Чт: 9:30–18:00",
             "work_hours_friday": "Пт: 9:30–17:00",
-            "company_name": 'ООО "ЛЕГИС-ТЕХ"',
-            "copyright_year": "2008",
-            "meta_title": 'Технические средства охраны: ТСО от компании "Легис-Тех"',
+            "company_name": 'ООО ЧОП "СИГМА-ПРОФИ"',
+            "copyright_year": "1993",
+            "meta_title": 'Технические средства охраны: ТСО от компании "Сигма-Профи"',
             "meta_description": "Проектирование, монтаж и обслуживание ТСО: систем видеонаблюдения, СКУД, охранной и пожарной сигнализации.",
             "yandex_maps_api_key": "",
-            "map_lat": "55.757222",
-            "map_lon": "37.635556",
+            "map_lat": "55.809400",
+            "map_lon": "37.601700",
             "hero_title": "Технические средства безопасности",
-            "hero_text": "Группа компаний «ЛЕГИС» предлагает расширенный комплекс услуг пультовой охраны.",
+            "hero_text": "Группа компаний «СИГМА-ПРОФИ» предлагает расширенный комплекс услуг пультовой охраны.",
             "about_title": "Технические средства безопасности",
-            "about_text": "«ЛЕГИС» предлагает комплексные системы для обеспечения безопасности объектов любой сложности «под ключ».",
-            "seo_text_title": "ЧОП Легис: знакомство с лучшим охранным предприятием Москвы",
-            "seo_text": "Группа компаний Легис с 1993 года занимается различными видами охранной деятельности.",
+            "about_text": "«СИГМА-ПРОФИ» предлагает комплексные системы для обеспечения безопасности объектов любой сложности «под ключ».",
+            "seo_text_title": "ЧОП Сигма-Профи: знакомство с лучшим охранным предприятием Москвы",
+            "seo_text": "Группа компаний «Сигма-Профи» с 1993 года занимается различными видами охранной деятельности.",
         }
         for key, value in settings_data.items():
             if not db.query(Setting).filter(Setting.key == key).first():

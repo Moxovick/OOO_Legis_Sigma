@@ -6,7 +6,7 @@ import os
 load_dotenv()
 
 # Normalize URL: strip sslmode from query string and +psycopg prefix
-_raw_url = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/legis_db")
+_raw_url = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/sigma_db")
 _url = _raw_url.replace("postgresql+psycopg://", "postgresql://", 1)
 # Remove ?sslmode=... from URL — passed via connect_args instead
 if "?sslmode=" in _url:

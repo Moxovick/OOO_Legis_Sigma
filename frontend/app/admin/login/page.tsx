@@ -41,7 +41,7 @@ export default function AdminLoginPage() {
         boxShadow: "0 24px 64px rgba(0,0,0,0.35)",
       }}>
         <div style={{ textAlign: "center", marginBottom: "2rem" }}>
-          <img src="/images/logo.svg" alt="Легис-Тех" style={{ height: "36px" }} />
+          <img src="/images/logo.svg" alt="Сигма-Профи" style={{ height: "36px" }} />
           <p style={{ marginTop: "0.75rem", color: "#94a3b8", fontSize: "0.85rem", margin: "0.75rem 0 0" }}>
             Панель управления
           </p>
@@ -56,7 +56,7 @@ export default function AdminLoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               style={inp}
-              placeholder="admin@legis-teh.com"
+              placeholder="admin@sigma-profi.org"
               autoComplete="email"
             />
           </div>
