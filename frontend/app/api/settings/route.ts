@@ -9,7 +9,8 @@ export async function GET() {
     const { data, error } = await db.from('settings').select('*');
     if (error) throw error;
     return NextResponse.json(data ?? []);
-  } catch (e) {
-    return NextResponse.json({ detail: String(e) }, { status: 500 });
+  } catch (e: any) {
+    const msg = e?.message ?? e?.code ?? JSON.stringify(e) ?? String(e);
+    return NextResponse.json({ detail: msg }, { status: 500 });
   }
 }
