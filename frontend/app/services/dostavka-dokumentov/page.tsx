@@ -8,7 +8,7 @@ export const metadata = {
   description: "Профессиональная доставка документов и частные инкассации в Москве. Работаем максимально оперативно и безопасно. Охрана под каждый заказ.",
 };
 
-const BASE = process.env.BACKEND_URL || "http://localhost:8000";
+const BASE = process.env.BACKEND_URL || process.env.SITE_URL || "http://localhost:3006";
 
 async function getPageContent(slug: string): Promise<Record<string, unknown>> {
   try {
