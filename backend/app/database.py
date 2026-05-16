@@ -13,9 +13,12 @@ if "?sslmode=" in _url:
     _url = _url.split("?sslmode=")[0]
 DATABASE_URL = _url
 
+# On production (remote Postgres) SSL is required; locally it's disabled
+_sslmode = os.getenv("DB_SSLMODE", "disable")
+
 engine = create_engine(
     DATABASE_URL,
-    connect_args={"sslmode": "require"},
+    connect_args={"sslmode": _sslmode},
     pool_pre_ping=True,
     pool_size=1,
     max_overflow=0,

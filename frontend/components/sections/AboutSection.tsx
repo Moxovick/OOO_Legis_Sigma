@@ -58,7 +58,7 @@ function CountUp({ target }: { target: string }) {
 export default function AboutSection({ settings, stats, partners }: Props) {
   return (
     <section className="section section--dark section--about">
-      <img className="section-about-image" src="/images/about.png" width={1040} height={640} alt="" />
+      <img className="section-about-image" src="/images/team-sigma.png" width={1040} height={640} alt="" />
       <div className="wrapper">
         <div className="about-block">
           <div className="text-styles">

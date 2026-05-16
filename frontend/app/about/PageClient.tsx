@@ -79,29 +79,29 @@ const TEAM = [
 
 const CERTS = [
   {
-    title: "Выписка из реестра лицензий МЧС",
-    image: "/upload/resize_cache/iblock/9ee/160_220_1/xcm1o6bh4r0ou0roftng8nqz031ad00a.jpg",
-    desc: "Лицензия № 77-06-2012-000595 от 21.05.2012. Деятельность по монтажу, техническому обслуживанию и ремонту средств обеспечения пожарной безопасности зданий и сооружений.",
+    title: "Лицензия на охранную деятельность",
+    image: "/images/certs/licenziya-cho.jpg",
+    desc: "Лицензия ЧО №047972 от 26 марта 2001 г. Осуществление частной охранной деятельности. ООО ЧОП «СИГМА-ПРОФИ».",
   },
   {
-    title: "Сертификат БОЛИД",
-    image: "/upload/resize_cache/iblock/dca/160_220_1/3lr1n32yhj0uuv6iuoqhx80vv025mr2j.jpg",
-    desc: "Сертификат БОЛИД (ИСО «ОРИОН») № 372/23с. Программирование и пусконаладка автоматических систем пожаротушения.",
+    title: "Лицензия ФСБ",
+    image: "/images/certs/licenziya-fsb.jpg",
+    desc: "Лицензия УФСБ России №0115785 от 18 декабря 2019 г. Проведение работ, связанных с использованием сведений, составляющих государственную тайну.",
   },
   {
-    title: "Сертификат СТРЕЛЕЦ-ПРО",
-    image: "/upload/resize_cache/iblock/9c5/160_220_1/njy8j1n4czq4ht1cvhwkyz73g5k7id7n.jpg",
-    desc: "Сертификат СТРЕЛЕЦ-ПРО (АРГУССПЕКТР) № 13314. Беспроводная система безопасности «СТРЕЛЕЦ-ПРО».",
+    title: "Сертификат о прохождении обучения",
+    image: "/images/certs/sert-obuchenie.jpg",
+    desc: "Сертификат №48ц-04/2018. Сотрудники отдела личной охраны ГК «Сигма-Профи» прошли курс «Комплексное обеспечение безопасности охраняемого лица. Уровень 3».",
   },
   {
-    title: "Сертификат КОДОС",
-    image: "/upload/resize_cache/iblock/e5b/160_220_1/xcqi47fv7lgamoaaymksurqioer19uiv.jpg",
-    desc: "Сертификат КОДОС № 20092024/1507К. Интегрированная система безопасности КОДОС.",
+    title: "Сертификат НП «Тактика»",
+    image: "/images/certs/sert-taktika.jpg",
+    desc: "Сертификат №541 от 05 ноября 2010 г. Сотрудники ООО ЧОП «СИГМА-ПРОФИ» прошли обучение по программе «Тактико-специальная подготовка сотрудников личной охраны».",
   },
   {
-    title: "Сертификат Axxon Intellect",
-    image: "/upload/resize_cache/iblock/72f/160_220_1/sqd2ec7jfgfiblgpnx0dryi8hnqn5i1o.jpg",
-    desc: "Сертификат Axxon Intellect Сертифицированный Профессионал № 14533.",
+    title: "Сертификат МОО «Элита»",
+    image: "/images/certs/sert-elita.jpg",
+    desc: "Сертификат от 13 января 2012 г. Охранники ЧОП «СИГМА-ПРОФИ» прошли обучение в тренинговом клубе телохранителей «Элита» и показали хорошие результаты.",
   },
 ];
 
@@ -122,7 +122,7 @@ export default function PageClient({ settings, stats, partners, services }: Prop
       <main>
         {/* Hero */}
         <section className="section section--dark section--top-0 overflow-hidden">
-          <img className="section-about-image section-about-image--2" src="/images/about.png" width={1040} height={640} alt="" />
+          <img className="section-about-image section-about-image--2" src="/images/team-sigma.png" width={1040} height={640} alt="" />
           <div className="section-glare section-glare--6"></div>
           <div className="wrapper">
             <ul className="breadcrumbs">

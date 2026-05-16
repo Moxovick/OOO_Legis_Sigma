@@ -45,3 +45,29 @@ body {
 .header a {
   color: #fff !important;
 }
+
+/* Logo: square badge — control size per breakpoint */
+.logo__image {
+  width: auto !important;
+  height: 5rem !important;
+}
+@media screen and (max-width: 1200px) {
+  .logo__image {
+    height: 3rem !important;
+  }
+}
+
+/* Stages section: fit all 6 items within the viewport */
+@media screen and (min-width: 1201px) {
+  .stages-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  .stages {
+    width: 100%;
+  }
+  .stage-item {
+    min-width: 0 !important;
+    flex: 1 1 0 !important;
+  }
+}

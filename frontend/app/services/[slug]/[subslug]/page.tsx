@@ -1,6 +1,43 @@
 import { getSettings, getService, settingsToMap } from "@/lib/api";
 import { notFound } from "next/navigation";
 import SubServicePageClient from "./PageClient";
+import type { ServiceDetail } from "@/types";
+
+const KNOWN_SLUG_PARENTS: Record<string, string> = {
+  "proektirovanie-skud": "skud",
+  "montazh-skud": "skud",
+  "obsluzhivanie-skud": "skud",
+  "biometricheskie": "skud",
+  "proektirovanie-videonablyudeniya": "videonablyudenie",
+  "montazh-videonablyudeniya": "videonablyudenie",
+  "obsluzhivanie-videonablyudeniya": "videonablyudenie",
+  "proektirovanie-pozharnyh-sistem": "pozharnaya-bezopasnost",
+  "montazh-pozharnyh-sistem": "pozharnaya-bezopasnost",
+  "obsluzhivanie-pozharnyh-sistem": "pozharnaya-bezopasnost",
+  "proektirovanie-signalizacii": "okhrannaya-signalizatsiya",
+  "montazh-signalizacii": "okhrannaya-signalizatsiya",
+  "obsluzhivanie-signalizacii": "okhrannaya-signalizatsiya",
+  "proektirovanie-ksb": "kompleksnye-sistemy-bezopasnosti",
+  "montazh-ksb": "kompleksnye-sistemy-bezopasnosti",
+  "obsluzhivanie-ksb": "kompleksnye-sistemy-bezopasnosti",
+};
+
+const PARENT_TITLES: Record<string, string> = {
+  "skud": "СКУД",
+  "videonablyudenie": "Видеонаблюдение",
+  "pozharnaya-bezopasnost": "Пожарная безопасность",
+  "okhrannaya-signalizatsiya": "Охранная сигнализация",
+  "kompleksnye-sistemy-bezopasnosti": "Комплексные системы безопасности",
+};
+
+function makeFallbackService(slug: string): ServiceDetail {
+  const title = PARENT_TITLES[slug] ?? slug;
+  return {
+    id: 0, slug, title, description: null, icon_url: null, image_url: null,
+    sort_order: 0, is_active: true, meta_title: null, meta_description: null,
+    content_design: null, content_install: null, content_maintain: null,
+  };
+}
 
 export const revalidate = 86400;
 
@@ -69,6 +106,17 @@ export default async function SubServicePage({
       />
     );
   } catch {
-    notFound();
+    // Backend unavailable — render with fallback if subslug is known
+    const parentSlug = KNOWN_SLUG_PARENTS[subslug];
+    if (!parentSlug) notFound();
+    const pageTitle = SUB_TITLES[subslug] ?? subslug;
+    return (
+      <SubServicePageClient
+        settings={{}}
+        service={makeFallbackService(parentSlug)}
+        subslug={subslug}
+        pageTitle={pageTitle}
+      />
+    );
   }
 }

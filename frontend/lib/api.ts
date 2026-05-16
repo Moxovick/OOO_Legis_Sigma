@@ -153,7 +153,14 @@ export async function submitLead(data: {
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err?.detail || "Ошибка отправки");
+    const detail = err?.detail;
+    let message = "Ошибка отправки";
+    if (typeof detail === "string") {
+      message = detail;
+    } else if (Array.isArray(detail) && detail.length > 0) {
+      message = detail.map((d: { msg?: string }) => d.msg ?? "Ошибка").join(", ");
+    }
+    throw new Error(message);
   }
   return res.json();
 }
