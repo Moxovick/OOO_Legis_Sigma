@@ -1,4 +1,4 @@
-export const revalidate = 86400;
+export const revalidate = 0;
 
 import { getSettings, settingsToMap } from "@/lib/api";
 import PageClient from "./PageClient";

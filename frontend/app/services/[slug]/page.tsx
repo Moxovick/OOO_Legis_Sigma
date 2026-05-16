@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import ServicePageClient from "./PageClient";
 import type { ServiceDetail } from "@/types";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 const KNOWN_SLUGS = [
   "skud",

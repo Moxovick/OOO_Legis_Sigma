@@ -1,7 +1,7 @@
 import { getSettings, settingsToMap } from "@/lib/api";
 import PageClient from "./PageClient";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 export const metadata = {
   title: "Доставка документов и частные инкассации — Сигма-Профи",

@@ -1,7 +1,7 @@
 import { getSettings, settingsToMap } from "@/lib/api";
 import PageClient from "./PageClient";
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 export async function generateMetadata() {
   return {

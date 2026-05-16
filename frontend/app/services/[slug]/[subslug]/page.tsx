@@ -39,7 +39,7 @@ function makeFallbackService(slug: string): ServiceDetail {
   };
 }
 
-export const revalidate = 86400;
+export const revalidate = 0;
 
 const SUB_TITLES: Record<string, string> = {
   "proektirovanie-skud": "Проектирование СКУД",
