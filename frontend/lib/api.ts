@@ -1,6 +1,6 @@
 import type { Setting, Service, ServiceDetail, Offer, Partner, Stat, LeadList } from "@/types";
 
-const BASE = process.env.BACKEND_URL || "http://localhost:8000";
+const BASE = process.env.BACKEND_URL || process.env.SITE_URL || "http://localhost:3006";
 
 async function apiFetch<T>(path: string, options?: RequestInit): Promise<T> {
   const controller = new AbortController();
